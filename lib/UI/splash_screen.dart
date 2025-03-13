@@ -32,17 +32,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.flash_on, size: 80, color: Colors.white), // Your Logo
+            Icon(Icons.flash_on, size: 80, color: Colors.yellow), // Your Logo
             SizedBox(height: 20),
             Text(
               "Hygienictank",
-              style: TextStyle(fontSize: 24, color: Colors.white),
+              style: TextStyle(fontSize: 24, color: Colors.blue),
             ),
             SizedBox(height: 30),
 
             // Loader Animation
             CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
             ),
           ],
         ),
