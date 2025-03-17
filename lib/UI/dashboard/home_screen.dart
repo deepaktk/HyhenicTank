@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart'; // Import for charts
 import 'package:hygienic_tank/UI/dashboard/completed_tasks.dart';
 import 'package:hygienic_tank/UI/dashboard/pending_tasks.dart';
+import 'package:hygienic_tank/UI/dashboard/todays_work_list.dart';
 import 'package:hygienic_tank/models/home_page_response.dart' as homePage;
 import 'package:hygienic_tank/models/new_enquiry_response_model.dart'
     as enquiry;
@@ -81,7 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                       ),
-                      _buildInfoCard("Today's", oData.todaysWorks, Colors.blue),
+                      GestureDetector(
+                        child: _buildInfoCard(
+                            "Today's", oData.todaysWorks, Colors.blue),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TodaysWorkListScreen()),
+                          );
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 30),

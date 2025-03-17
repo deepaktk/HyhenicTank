@@ -1,27 +1,27 @@
 // To parse this JSON data, do
 //
-//     final listOfWorkAssignedTodayResponse = listOfWorkAssignedTodayResponseFromJson(jsonString);
+//     final listOfWorkTodayResponseModel = listOfWorkTodayResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ListOfWorkAssignedTodayResponse listOfWorkAssignedTodayResponseFromJson(String str) => ListOfWorkAssignedTodayResponse.fromJson(json.decode(str));
+ListOfWorkTodayResponseModel listOfWorkTodayResponseModelFromJson(String str) => ListOfWorkTodayResponseModel.fromJson(json.decode(str));
 
-String listOfWorkAssignedTodayResponseToJson(ListOfWorkAssignedTodayResponse data) => json.encode(data.toJson());
+String listOfWorkTodayResponseModelToJson(ListOfWorkTodayResponseModel data) => json.encode(data.toJson());
 
-class ListOfWorkAssignedTodayResponse {
+class ListOfWorkTodayResponseModel {
     String status;
     String error;
     ValidationErrors validationErrors;
     OData oData;
 
-    ListOfWorkAssignedTodayResponse({
+    ListOfWorkTodayResponseModel({
         required this.status,
         required this.error,
         required this.validationErrors,
         required this.oData,
     });
 
-    factory ListOfWorkAssignedTodayResponse.fromJson(Map<String, dynamic> json) => ListOfWorkAssignedTodayResponse(
+    factory ListOfWorkTodayResponseModel.fromJson(Map<String, dynamic> json) => ListOfWorkTodayResponseModel(
         status: json["status"],
         error: json["error"],
         validationErrors: ValidationErrors.fromJson(json["validationErrors"]),
@@ -56,27 +56,28 @@ class WorkDetail {
     String id;
     String employeId;
     String workId;
-    String workCaptureId;
+    String tankId;
     String clientId;
     DateTime workDate;
-    ClientName clientName;
+    String clientName;
     String clientType;
+    String franchiseId;
     String orgType;
-    Address address;
-    Landmark landmark;
+    String address;
+    String landmark;
     String state;
     String district;
     String latitude;
-    Longitude longitude;
-    Town town;
-    Location location;
+    String longitude;
+    String town;
+    String location;
     String reference;
     String leadStatus;
     String mode;
     String amount;
     DateTime entryDate;
     DateTime tentativeDate;
-    FollowUpDate followUpDate;
+    String followUpDate;
     String createdBy;
     DateTime createdOn;
     String modifiedBy;
@@ -87,11 +88,12 @@ class WorkDetail {
         required this.id,
         required this.employeId,
         required this.workId,
-        required this.workCaptureId,
+        required this.tankId,
         required this.clientId,
         required this.workDate,
         required this.clientName,
         required this.clientType,
+        required this.franchiseId,
         required this.orgType,
         required this.address,
         required this.landmark,
@@ -119,27 +121,28 @@ class WorkDetail {
         id: json["id"],
         employeId: json["employe_id"],
         workId: json["work_id"],
-        workCaptureId: json["work_capture_id"],
         clientId: json["client_id"],
+        tankId: json["tankId"],
         workDate: DateTime.parse(json["work_date"]),
-        clientName: clientNameValues.map[json["client_name"]]!,
+        clientName: json["client_name"],
         clientType: json["client_type"],
+        franchiseId: json["franchise_id"],
         orgType: json["org_type"],
-        address: addressValues.map[json["address"]]!,
-        landmark: landmarkValues.map[json["landmark"]]!,
+        address: json["address"],
+        landmark: json["landmark"],
         state: json["state"],
         district: json["district"],
         latitude: json["latitude"],
-        longitude: longitudeValues.map[json["longitude"]]!,
-        town: townValues.map[json["town"]]!,
-        location: locationValues.map[json["location"]]!,
+        longitude: json["longitude"],
+        town: json["town"],
+        location: json["location"],
         reference: json["reference"],
         leadStatus: json["lead_status"],
         mode: json["mode"],
         amount: json["amount"],
         entryDate: DateTime.parse(json["entry_date"]),
         tentativeDate: DateTime.parse(json["tentative_date"]),
-        followUpDate: followUpDateValues.map[json["follow_up_date"]]!,
+        followUpDate: json["follow_up_date"],
         createdBy: json["created_by"],
         createdOn: DateTime.parse(json["created_on"]),
         modifiedBy: json["modified_by"],
@@ -151,27 +154,28 @@ class WorkDetail {
         "id": id,
         "employe_id": employeId,
         "work_id": workId,
-        "work_capture_id": workCaptureId,
         "client_id": clientId,
+        "tankId": tankId,
         "work_date": "${workDate.year.toString().padLeft(4, '0')}-${workDate.month.toString().padLeft(2, '0')}-${workDate.day.toString().padLeft(2, '0')}",
-        "client_name": clientNameValues.reverse[clientName],
+        "client_name": clientName,
         "client_type": clientType,
+        "franchise_id": franchiseId,
         "org_type": orgType,
-        "address": addressValues.reverse[address],
-        "landmark": landmarkValues.reverse[landmark],
+        "address": address,
+        "landmark": landmark,
         "state": state,
         "district": district,
         "latitude": latitude,
-        "longitude": longitudeValues.reverse[longitude],
-        "town": townValues.reverse[town],
-        "location": locationValues.reverse[location],
+        "longitude": longitude,
+        "town": town,
+        "location": location,
         "reference": reference,
         "lead_status": leadStatus,
         "mode": mode,
         "amount": amount,
         "entry_date": "${entryDate.year.toString().padLeft(4, '0')}-${entryDate.month.toString().padLeft(2, '0')}-${entryDate.day.toString().padLeft(2, '0')}",
         "tentative_date": "${tentativeDate.year.toString().padLeft(4, '0')}-${tentativeDate.month.toString().padLeft(2, '0')}-${tentativeDate.day.toString().padLeft(2, '0')}",
-        "follow_up_date": followUpDateValues.reverse[followUpDate],
+        "follow_up_date": followUpDate,
         "created_by": createdBy,
         "created_on": createdOn.toIso8601String(),
         "modified_by": modifiedBy,
@@ -179,74 +183,6 @@ class WorkDetail {
         "is_deleted": isDeleted,
     };
 }
-
-enum Address {
-    CORDS_INNOVATIONS_PVT_LIMITED,
-    EXERCITATIONEM_IPSAM
-}
-
-final addressValues = EnumValues({
-    "Cords Innovations Pvt Limited": Address.CORDS_INNOVATIONS_PVT_LIMITED,
-    "Exercitationem ipsam": Address.EXERCITATIONEM_IPSAM
-});
-
-enum ClientName {
-    MONTANA,
-    PRASANTH
-}
-
-final clientNameValues = EnumValues({
-    "Montana": ClientName.MONTANA,
-    "Prasanth": ClientName.PRASANTH
-});
-
-enum FollowUpDate {
-    THE_00000000
-}
-
-final followUpDateValues = EnumValues({
-    "0000-00-00": FollowUpDate.THE_00000000
-});
-
-enum Landmark {
-    ISTE_DELENITI_MINIM,
-    NEAR_SILVER_BELLS_SALOON
-}
-
-final landmarkValues = EnumValues({
-    "Iste deleniti minim ": Landmark.ISTE_DELENITI_MINIM,
-    "Near Silver Bells saloon": Landmark.NEAR_SILVER_BELLS_SALOON
-});
-
-enum Location {
-    TELENGANA,
-    UT_TEMPORIBUS_IMPEDI
-}
-
-final locationValues = EnumValues({
-    "Telengana": Location.TELENGANA,
-    "Ut temporibus impedi": Location.UT_TEMPORIBUS_IMPEDI
-});
-
-enum Longitude {
-    ACCUSAMUS_CULPA_DIC,
-    THE_9_WRY58734
-}
-
-final longitudeValues = EnumValues({
-    "Accusamus culpa dic": Longitude.ACCUSAMUS_CULPA_DIC,
-    "9wry58734": Longitude.THE_9_WRY58734
-});
-
-enum Town {
-    CHITTOOT,
-    EST_SED_NEMO_CONSEQU
-}
-
-final townValues = EnumValues({
-    "Chittoot": Town.CHITTOOT,
-    "Est sed nemo consequ": Town.EST_SED_NEMO_CONSEQU
-});
 
 class ValidationErrors {
     ValidationErrors();
@@ -256,16 +192,4 @@ class ValidationErrors {
 
     Map<String, dynamic> toJson() => {
     };
-}
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-            reverseMap = map.map((k, v) => MapEntry(v, k));
-            return reverseMap;
-    }
 }
